@@ -6,26 +6,3 @@ target
 /.project
 /.settings
 /RUNNING_PID
-play-fork-run.sbt
-sbt-ui.sbt
-common_copy.bat
-.sbtserver
-.cache-*
-.bak
-_org
-logs
-project/*
-target
-tmp
-.history
-dist
-.idea
-/*.iml
-.idea_modules
-.classpath
-.project
-RUNNING_PID
-.settings
-bin
-syntax: glob
-*.orig
