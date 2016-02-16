@@ -1,0 +1,88 @@
+# ---pronpt
+pronpt.index=[input something]
+pronpt.tutorial=[tutorial]
+pronpt.myroom=[家]
+
+# --- Command
+command.help.1=ls　　　　　: 勇者が移動できる場所を教えてくれるぞ。
+command.help.2=cd hoge　: hogeの場所に移動できるぞ。lsコマンドと組み合わせて使え！
+command.help.3=pwd　 　　: 勇者の現在地を教えてくれるぞ
+command.help.4=talk　　　　: 村人と会話ができるぞ
+command.help.5=clear　　　: 操作ログを削除するぞ
+command.help.6=../　　　　　: 直前の勇者がいた場所に戻るぞ
+
+# --- Constraints
+constraint.required=
+constraint.min=
+constraint.max=
+constraint.minLength=
+constraint.maxLength=
+constraint.email=
+
+# --- Boss
+boss.comment.1=b(・o・)ss 「ふはははは」
+boss.comment.2=b(・o・)ss 「無駄だ！」
+boss.comment.3=b(・o・)ss 「そんな攻撃は私には通用せん」
+boss.comment.4=b(・o・)ss 「深刻な武器不足」
+boss.comment.5=b(・o・)ss 「宿屋の店主には会ったか？」
+boss.comment.6=b(・o・)ss 「洋楽派？邦楽派？」
+boss.comment.7=b(・o・)ss 「ふぁ～～」
+boss.comment.8=b(・o・)ss 「ｗｗｗｗｗｗｗｗｗｗｗｗｗ」
+boss.comment.9=b(・o・)ss 「草不可避」
+boss.comment.10=b(・o・)ss 「いい加減にしろ」
+boss.comment.11=b(・o・)ss 「母親とは会話するなよ！」
+boss.comment.12=b(・o・)ss 「家帰っていい？」
+boss.comment.13=b(・o・)ss 「そんなちんけな武器で私が倒せると思うか！！」
+boss.comment.14=b(・o・)ss 「ふふふふふ」
+boss.comment.15=b(・o・)ss 「フフフフフウッ」
+boss.comment.16=b(・o・)ss 「ワーーーーーーーーーーーーハハハ」
+boss.comment.17=b(・o・)ss 「こしょばゆいわ！」
+boss.comment.18=b(・o・)ss 「何を言っているんだ？」
+boss.comment.19=b(・o・)ss 「無駄無駄無駄無駄無駄無駄」
+boss.comment.20=b(・o・)ss 「やっぱマイホームって憧れるよね」
+boss.comment.21=b(・o・)ss 「このゲームにリセット機能は無いぞ！！」
+boss.comment.22=b(・o・)ss 「あきらめたらTOPページに戻るんだな！」
+boss.comment.23=b(・o・)ss 「絶対に私は倒せないぞ！」
+boss.comment.24=b(・o・)ss 「私は負けない」
+boss.comment.25=b(・o・)ss 「俺はボスだが、特に目的とかそういうのは無い！」
+boss.comment.26=b(・o・)ss 「いい加減あきらめたらどうだ？」
+boss.comment.27=b(・o・)ss 「あぁ～ん？」
+boss.comment.28=b(・o・)ss 「無駄だこの中卒野郎」
+boss.comment.29=b(・o・)ss 「リセット推奨」
+boss.comment.30=b(・o・)ss 「もうあきらめただろ？」
+boss.comment.31=b(・o・)ss 「無理だって。倒せないんだって！」
+boss.comment.32=b(・o・)ss 「リセットしろ」
+boss.comment.33=b(・o・)ss 「母親と話すなよ!絶対だぞ！」
+boss.comment.34=b(・o・)ss 「もっと仲間を増やしてくるんだな！」
+boss.comment.35=b(・o・)ss 「母親はかなりキーキャラ」
+boss.comment.36=b(・o・)ss 「痛くもかゆくもないわ！」
+boss.comment.37=b(・o・)ss 「ちょｗｗｗｗｗｗｗｗｗｗｗ」
+boss.comment.38=b(・o・)ss 「フッ」
+boss.comment.39=b(・o・)ss 「ｍｍｍｍ」
+boss.comment.40=b(・o・)ss 「そんなの意味が無いぞ」
+boss.comment.41=b(・o・)ss 「最初からやり直すんだな。」
+boss.comment.42=b(・o・)ss 「ヒント：こっから何とかなる」
+boss.comment.43=b(・o・)ss 「お前の親とは話したか？」
+boss.comment.44=b(・o・)ss 「。。。」
+boss.comment.45=b(・o・)ss (何も言わずこちらを見ている)
+
+boss.comment.clear=b(・o・)ss 「ぐはああああああああああああああああ」
+
+# --- Opening
+opening.1=╔═╗　┌─┐　┌┬┐　┌┬┐　┌─┐　┌┐┌　┌─┐  ╦　╦╔═╗╦═╗╔═╗  
+opening.2=║　　　│　 │　│││　│││　├─┤　│││　│　 │  ╠═╣║╣　╠╦╝║　║  
+opening.3=╚═╝　└─┘　┴　 ┴　┴　 ┴　┴ 　┴　┘└┘　└─┘  ╩　╩╚═╝╩╚═╚═╝
+
+# --- Town
+town.1=╔╦╗┌─┐┬　 ┬┌┐┌
+town.2=　║　│　 │││││││
+town.3=　╩　└─┘└┴┘┘└┘
+
+# --- Mother
+mother.face=J( ’ｰ`)し 
+mother.0=「。。。おはよう勇者起きなさい。。」
+mother.1=「？？　何を言ってるのかわから無いわ・・それじゃあ簡単に説明するわ。準備はいい？」
+mother.2=「あら！準備万端なのね！このゲームは全てコマンドで操作して貰うわ！ 使えるコマンドの一覧は"help"と入力するといつでも確認できるわ。」
+mother.3=「そんな感じでダンジョンと、そこに住むボスを倒すのが目標よ。	 それ以外の要素は特に何もないわ。 」
+mother.4=「 何か質問があれば言って頂戴。」
+mother.5=「わかったわ。それについては後日説明するわ。それでは、楽しい冒険の始まりよ！！！

@@ -1,0 +1,28 @@
+@(logs: List[String])(form: Form[forms.CommandForm])(pronpt: String)
+
+@main("始まりの町") {
+	
+    @if(!logs.isEmpty()) {
+		@for(log <- logs) {
+			<p id="logs"> >@log </p>
+	   	}
+	}
+	
+	@if(form.hasGlobalErrors) {
+	    <p id="error">
+	        > @form.globalError.message
+	    </p>
+	}
+	
+	@helper.form(action = routes.TownController.distribute()) {
+	    @helper.inputText(
+	    	field = form("command"),
+			args = 
+			'_label -> pronpt,
+			'class -> "hide",
+			'id -> "forcs"
+			)
+		
+		<input type="submit" id="hide">
+	}
+}
