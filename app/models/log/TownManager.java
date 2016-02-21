@@ -8,7 +8,8 @@ public class TownManager {
 
 		private TownManager() {}
 		
-		private static String cd = "C:\\Enviroment\\workspaces\\command_hero\\command_hero\\はじまりの町\\家";
+		private static final String S = File.separator;
+		private static String cd = "はじまりの町" + S + "家";
 
 		public static String getCd() {
 			Logger.debug("get directory [{}]", cd);

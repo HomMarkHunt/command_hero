@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 import models.log.LogManager;
@@ -52,7 +53,7 @@ public class TownService {
 			return false;
 		}
 		
-		String path = TownManager.getCd() + "\\" + target;
+		String path = TownManager.getCd() + File.separator + target;
 		
 		File file = new File(path);
 		if (file.isFile()) {
@@ -74,8 +75,8 @@ public class TownService {
 		String parentFile = file.getParent();
 		Logger.debug("Parent path is [{}]", parentFile);
 		
-		if (parentFile.equals("C:\\Enviroment\\workspaces\\command_hero\\command_hero")) {
-			Logger.warn("over root");
+		if (parentFile == null) {
+			Logger.warn("attempt to over root");
 			LogManager.addLogs("この町から出ることはできない");
 			return false;
 		}
@@ -105,7 +106,7 @@ public class TownService {
 		
 		
 		
-		String path = TownManager.getCd() + "\\" + target;
+		String path = TownManager.getCd() + File.separator + target;
 		
 		File file = new File(path);
 		if (file.isDirectory()) {
