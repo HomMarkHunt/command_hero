@@ -21,6 +21,8 @@ public class TownController extends Controller {
 			return badRequest(town.render(LogManager.getLogs(), form, TownManager.getpronpt()));
 		}
 		
+		// 使えるコマンドの一覧を書く
+		
 		String inputCommand = form.get().command;
 		
 		if (inputCommand.equals(TownCommands.clear.toString())) {
@@ -63,7 +65,7 @@ public class TownController extends Controller {
 			return ok(town.render(LogManager.getLogs(), form, TownManager.getpronpt()));
 		}
 
-		return null;
+		return null; // return ok() に修正, 別ブランチで
 	}
 
 }

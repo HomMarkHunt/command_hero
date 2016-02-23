@@ -29,6 +29,7 @@ public class TownService {
 	 	});
 	 }
 	
+	// execTalkと処理が似ているので共通化出来ないか？
 	public static boolean execCd(String command) {
 		Logger.debug("mocecd : is start");
 		
@@ -66,7 +67,7 @@ public class TownService {
 		if (parentFileName == null) {
 			Logger.warn("attempt to over root");
 			LogManager.addLogs("この町から出ることはできない");
-			return false;
+			return false; // ここで処理めたいだけなのでbreakでいいか、TownControllerも見て検討？
 		}
 		
 		TownManager.setCurrentDir(parentFileName);
@@ -99,13 +100,14 @@ public class TownService {
 		readFile(talkTarget);
 
 		if (targetDir.equals("凄く大事なことを言う村長.txt")) {
-		Logger.debug("boos flg true");
+			Logger.debug("boos flg true");
 			return true;
 		}
 		
 		return false;
 	}
 	
+	// メソッド名が不適切、思いつかないのでこのまま
 	private static void readFile(File file) {
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));) {
 			String line;
