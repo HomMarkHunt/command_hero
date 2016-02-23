@@ -14,54 +14,54 @@ import views.html.town;
 
 public class TownController extends Controller {
 	
-	public Result distribute() {
+	public Result execCommand() {
 		Form<CommandForm> form = new Form<CommandForm>(CommandForm.class).bindFromRequest();
 		
 		if (form.hasErrors()) {
 			return badRequest(town.render(LogManager.getLogs(), form, TownManager.getpronpt()));
 		}
 		
-		String command = form.get().command;
+		String inputCommand = form.get().command;
 		
 		// clearコマンド時の挙動
-		if (command.equals(TownCommands.clear.toString())) {
+		if (inputCommand.equals(TownCommands.clear.toString())) {
 			LogManager.clearLogs();
 			return ok(town.render(LogManager.getLogs(), form,  TownManager.getpronpt()));
 		}
 		
 		// helpコマンド時の挙動
-		if (command.equals(TownCommands.help.toString())) {
-			TownService.createHelp();
+		if (inputCommand.equals(TownCommands.help.toString())) {
+			TownService.execHelp();
 			return ok(town.render(LogManager.getLogs(), form, TownManager.getpronpt()));
 		}
 		
 		// pwdコマンド時の操作
-		if (command.equals(TownCommands.pwd.toString())) {
-			LogManager.addLogs("勇者の現在地 : " + TownService.showPwd());
+		if (inputCommand.equals(TownCommands.pwd.toString())) {
+			LogManager.addLogs("勇者の現在地 : " + TownService.execPwd());
 			return ok(town.render(LogManager.getLogs(), form, TownManager.getpronpt()));
 		}
 		
 		// lsコマンド時の操作
-		if (command.equals(TownCommands.ls.toString())) {
-			TownService.showLs();
+		if (inputCommand.equals(TownCommands.ls.toString())) {
+			TownService.execLs();
 			return ok(town.render(LogManager.getLogs(), form, TownManager.getpronpt()));
 		}
 		
 		// cd コマンド時の操作
-		if (command.startsWith("cd ")) {
-			boolean moveResult = TownService.moveCd(command);
+		if (inputCommand.startsWith("cd ")) {
+			TownService.execCd(inputCommand);
 			return ok(town.render(LogManager.getLogs(), form, TownManager.getpronpt()));
 		}
 		
 		// ../コマンド時の操作
-		if (command.equals("../")) {
-			TownService.moveUp();
+		if (inputCommand.equals("../")) {
+			TownService.execUp();
 			return ok(town.render(LogManager.getLogs(), form, TownManager.getpronpt()));
 		}
 		
 		// talkコマンド時の操作
-		if (command.startsWith("talk ")) {
-			boolean boosFlg = TownService.talk(command);
+		if (inputCommand.startsWith("talk ")) {
+			boolean boosFlg = TownService.execTalk(inputCommand);
 			
 			if (boosFlg) {
 				Form<BossForm> bossForm = new Form<BossForm>(BossForm.class);
