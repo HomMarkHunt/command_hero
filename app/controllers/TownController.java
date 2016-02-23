@@ -37,7 +37,7 @@ public class TownController extends Controller {
 		
 		// pwdコマンド時の操作
 		if (inputCommand.equals(TownCommands.pwd.toString())) {
-			LogManager.addLogs("勇者の現在地 : " + TownService.execPwd());
+			TownService.execPwd();
 			return ok(town.render(LogManager.getLogs(), form, TownManager.getpronpt()));
 		}
 		

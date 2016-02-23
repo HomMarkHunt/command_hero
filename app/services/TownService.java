@@ -4,9 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.Optional;
+import java.util.Arrays;
 import java.util.stream.IntStream;
-
 import models.log.LogManager;
 import models.log.TownManager;
 import play.Logger;
@@ -25,31 +24,27 @@ public class TownService {
 	 	
 	 	File currentDir = new File(TownManager.getCurrentDir());
 	 	File[] children = currentDir.listFiles();
-	 	for (File child : children) {
-			LogManager.addLogs(child.getName());
-		}
+	 	Arrays.asList(children).stream().forEach(child -> {
+	 		LogManager.addLogs(child.getName());
+	 	});
 	 }
 	
 	public static boolean execCd(String command) {
 		Logger.debug("mocecd : is start");
-		String target = command.substring(3);
 		
+		String target = command.substring(3);
 		if (target.length() == 0) {
 			LogManager.addLogs("移動先を入力してください");
 			return false;
 		}
 		
-		Logger.debug("cd : Target directory is [{}]", target);
-		
 		String currentDir = TownManager.getCurrentDir();
-		
 		if (currentDir.contains("家") || currentDir.contains("宿") || currentDir.contains("武器")) {
 			LogManager.addLogs("そこには移動できません");
 			return false;
 		}
 		
 		String targetPath = TownManager.getCurrentDir() + File.separator + target;
-		
 		File changeDirTarget = new File(targetPath);
 		if (changeDirTarget.isFile()) {
 			LogManager.addLogs("そこには移動できません");
@@ -68,7 +63,6 @@ public class TownService {
 		
 		String parentFileName = new File(currentDir).getParent();
 		Logger.debug("Parent path is [{}]", parentFileName);
-		
 		if (parentFileName == null) {
 			Logger.warn("attempt to over root");
 			LogManager.addLogs("この町から出ることはできない");
@@ -79,50 +73,50 @@ public class TownService {
 		return true;
 	}
 	
-	public static String execPwd() {
+	public static void execPwd() {
 		File currentDir = new File(TownManager.getCurrentDir());
 		String absPath = currentDir.getAbsolutePath();
-		return absPath.substring(51);
+		
+		LogManager.addLogs("勇者の現在地 : " + absPath.substring(51));
 	}
 	
 	public static boolean execTalk(String command) {
 		Logger.debug("mocecd : is start");
+	
 		String targetDir = command.substring(5);
-		
 		if (targetDir.length() == 0) {
 			LogManager.addLogs("会話の相手を入力してください。");
 			return false;
 		}
 		
-		Logger.debug("talk : Target is [{}]", targetDir);
-		
-		
-		
 		String targetPath = TownManager.getCurrentDir() + File.separator + targetDir;
-		
 		File talkTarget = new File(targetPath);
 		if (talkTarget.isDirectory()) {
 			LogManager.addLogs("それとは会話できません。");
 			return false;
 		}
 		
-	    try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(talkTarget), "UTF-8"));) {
-	        String line;
-	        while ((line = br.readLine()) != null) {
-	        	LogManager.addLogs(line);
-	        }
-	    } catch (Exception e) {
-	    	System.out.println(e.getMessage());
-	    	LogManager.addLogs("会話に失敗しました。");
-	    }
-	        
-	    // ボス戦
-	    if (targetDir.equals("凄く大事なことを言う村長.txt")) {
-	    	Logger.debug("boos flg true");
-	    	return true;
-	    }
-	    
-	    return false;
+		readFile(talkTarget);
+
+		// ボス戦
+		if (targetDir.equals("凄く大事なことを言う村長.txt")) {
+		Logger.debug("boos flg true");
+			return true;
+		}
+		
+		return false;
+	}
+	
+	private static void readFile(File file) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));) {
+			String line;
+			while ((line = br.readLine()) != null) {
+				LogManager.addLogs(line);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			LogManager.addLogs("会話に失敗しました。");
+		}
 	}
 	
 }
