@@ -23,43 +23,36 @@ public class TownController extends Controller {
 		
 		String inputCommand = form.get().command;
 		
-		// clearコマンド時の挙動
 		if (inputCommand.equals(TownCommands.clear.toString())) {
 			LogManager.clearLogs();
 			return ok(town.render(LogManager.getLogs(), form,  TownManager.getpronpt()));
 		}
 		
-		// helpコマンド時の挙動
 		if (inputCommand.equals(TownCommands.help.toString())) {
 			TownService.execHelp();
 			return ok(town.render(LogManager.getLogs(), form, TownManager.getpronpt()));
 		}
 		
-		// pwdコマンド時の操作
 		if (inputCommand.equals(TownCommands.pwd.toString())) {
 			TownService.execPwd();
 			return ok(town.render(LogManager.getLogs(), form, TownManager.getpronpt()));
 		}
 		
-		// lsコマンド時の操作
 		if (inputCommand.equals(TownCommands.ls.toString())) {
 			TownService.execLs();
 			return ok(town.render(LogManager.getLogs(), form, TownManager.getpronpt()));
 		}
 		
-		// cd コマンド時の操作
 		if (inputCommand.startsWith("cd ")) {
 			TownService.execCd(inputCommand);
 			return ok(town.render(LogManager.getLogs(), form, TownManager.getpronpt()));
 		}
 		
-		// ../コマンド時の操作
 		if (inputCommand.equals("../")) {
 			TownService.execUp();
 			return ok(town.render(LogManager.getLogs(), form, TownManager.getpronpt()));
 		}
 		
-		// talkコマンド時の操作
 		if (inputCommand.startsWith("talk ")) {
 			boolean boosFlg = TownService.execTalk(inputCommand);
 			

@@ -98,7 +98,6 @@ public class TownService {
 		
 		readFile(talkTarget);
 
-		// ボス戦
 		if (targetDir.equals("凄く大事なことを言う村長.txt")) {
 		Logger.debug("boos flg true");
 			return true;
