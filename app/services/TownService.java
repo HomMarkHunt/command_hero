@@ -4,8 +4,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.stream.IntStream;
+
 import models.log.LogManager;
 import models.log.TownManager;
 import play.Logger;
@@ -75,10 +78,7 @@ public class TownService {
 	}
 	
 	public static void execPwd() {
-		File currentDir = new File(TownManager.getCurrentDir());
-		String absPath = currentDir.getAbsolutePath();
-		
-		LogManager.addLogs("勇者の現在地 : " + absPath.substring(51));
+		LogManager.addLogs("勇者の現在地 : " + TownManager.getCurrentDir());
 	}
 	
 	public static boolean execTalk(String command) {
