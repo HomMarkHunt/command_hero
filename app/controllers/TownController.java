@@ -21,8 +21,17 @@ public class TownController extends Controller {
 			return badRequest(town.render(LogManager.getLogs(), form, TownManager.getpronpt()));
 		}
 		
-		// 使えるコマンドの一覧を書く
-		
+		/**
+		 * コマンド一覧
+		 *
+		 * clear : 操作ログを全て消す
+		 * help  : コマンドの説明を表示
+		 * pwd   : アプリケーションルートからカレントディレクトリの相対パスを表示
+		 * ls    : カレントディレクトリのファイル・フォルダを表示
+		 * cd    : 半角スペースで区切られた先のディレクトリに移動する
+		　* ../   : 一つ上のディレクトリに移動する
+		 * talk  : 半角スペースで区切られた先のフ.txtァイルを表示する
+		*/ 
 		String inputCommand = form.get().command;
 		
 		if (inputCommand.equals(TownCommands.clear.toString())) {

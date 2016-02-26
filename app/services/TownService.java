@@ -33,9 +33,11 @@ public class TownService {
 	 }
 	
 	// execTalkと処理が似ているので共通化出来ないか？
+	// TODO voidに変更
 	public static boolean execCd(String command) {
 		Logger.debug("mocecd : is start");
 		
+		// "target" <-subString(3)- "cd target"
 		String target = command.substring(3);
 		if (target.length() == 0) {
 			LogManager.addLogs("移動先を入力してください");
@@ -84,6 +86,7 @@ public class TownService {
 	public static boolean execTalk(String command) {
 		Logger.debug("mocecd : is start");
 	
+		// "target" <-subString(5)- "talk target"
 		String targetDir = command.substring(5);
 		if (targetDir.length() == 0) {
 			LogManager.addLogs("会話の相手を入力してください。");
