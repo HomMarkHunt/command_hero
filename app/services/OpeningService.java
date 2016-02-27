@@ -12,24 +12,24 @@ public class OpeningService {
 	private static int tutorialCuount = 0;
 
 	public static void setIndex() {
-		LogManager.clearLogs();
-		LogManager.addLogs(Messages.get("opening.1"));
-		LogManager.addLogs(Messages.get("opening.2"));
-		LogManager.addLogs(Messages.get("opening.3"));
-		IntStream.range(0, 5).forEach(i -> LogManager.addLogs(StringUtils.SPACE));
-		LogManager.addLogs(sayMother(""));
+		LogManager.clear();
+		LogManager.addLog(Messages.get("opening.1"));
+		LogManager.addLog(Messages.get("opening.2"));
+		LogManager.addLog(Messages.get("opening.3"));
+		IntStream.range(0, 5).forEach(i -> LogManager.addLog(StringUtils.SPACE));
+		LogManager.addLog(sayMother(""));
 	}
 	
 	public static Boolean tutorial(String command) {
 		if (tutorialCuount > 5) {
 			tutorialCuount = 0;
 			IntStream.range(1, 4).forEach(i -> {
-				LogManager.addLogs(Messages.get("town." + i));
+				LogManager.addLog(Messages.get("town." + i));
 			});
 			return true;
 		}
 		
-		LogManager.addLogs(sayMother(command));
+		LogManager.addLog(sayMother(command));
 		return false;
 	}
 

@@ -9,6 +9,6 @@ public class CommandUtil {
 		sb.append(pronpt);
 		sb.append(" : ");
 		sb.append(command);
-		LogManager.addLogs(sb.toString());
+		LogManager.addLog(sb.toString());
 	}
 }

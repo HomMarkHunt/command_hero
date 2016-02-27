@@ -2,10 +2,8 @@ package services;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
@@ -16,51 +14,43 @@ import play.i18n.Messages;
 
 public class TownService {
 
-	public static void execHelp() {
+	public static void help() {
 		IntStream.range(1, 7).forEach(i -> {
-			LogManager.addLogs(Messages.get("command.help." + i));
+			LogManager.addLog(Messages.get("command.help." + i));
 		});
 	}
 	
-	public static void execLs() {
+	public static void ls() {
 		Logger.debug("show ls : is start");
 	 	
 	 	File currentDir = new File(TownManager.getCurrentDir());
-	 	File[] children = currentDir.listFiles();
-	 	Arrays.asList(children).stream().forEach(child -> {
-	 		LogManager.addLogs(child.getName());
+	 	File[] files = currentDir.listFiles();
+	 	Arrays.asList(files).stream().forEach(f -> {
+	 		LogManager.addLog(f.getName());
 	 	});
 	 }
 	
-	// execTalkと処理が似ているので共通化出来ないか？
 	// TODO voidに変更
-	public static boolean execCd(String command) {
+	public static boolean cd(String command) {
 		Logger.debug("mocecd : is start");
 		
-		// "target" <-subString(3)- "cd target"
+		// TODO Commandクラスを作成してそこに判定ロジックを移動、マジックナンバーも置き換える
 		String target = command.substring(3);
 		if (target.length() == 0) {
-			LogManager.addLogs("移動先を入力してください");
+			LogManager.addLog("移動先を入力してください");
 			return false;
 		}
 		
-		String currentDir = TownManager.getCurrentDir();
-		if (currentDir.contains("家") || currentDir.contains("宿") || currentDir.contains("武器")) {
-			LogManager.addLogs("そこには移動できません");
+		File changeDirTarget = new File(TownManager.getCurrentDir() , target);
+		if (!changeDirTarget.exists() || changeDirTarget.isFile()) {
+			LogManager.addLog("そこには移動できません");
 			return false;
 		}
 		
-		String targetPath = TownManager.getCurrentDir() + File.separator + target;
-		File changeDirTarget = new File(targetPath);
-		if (changeDirTarget.isFile()) {
-			LogManager.addLogs("そこには移動できません");
-			return false;
-		}
-		
-		TownManager.setCurrentDir(targetPath);
+		TownManager.setCurrentDir(changeDirTarget.getPath());
 		return true;
 	}
-	
+		
 	public static boolean execUp() {
 		Logger.debug("../ : is start");
 		
@@ -71,32 +61,32 @@ public class TownService {
 		Logger.debug("Parent path is [{}]", parentFileName);
 		if (parentFileName == null) {
 			Logger.warn("attempt to over root");
-			LogManager.addLogs("この町から出ることはできない");
-			return false; // ここで処理めたいだけなのでbreakでいいか、TownControllerも見て検討？
+			LogManager.addLog("この町から出ることはできない");
+			return false;
 		}
 		
 		TownManager.setCurrentDir(parentFileName);
 		return true;
 	}
 	
-	public static void execPwd() {
-		LogManager.addLogs("勇者の現在地 : " + TownManager.getCurrentDir());
+	public static void pwd() {
+		LogManager.addLog("勇者の現在地 : " + TownManager.getCurrentDir());
 	}
 	
-	public static boolean execTalk(String command) {
+	public static boolean talk(String command) {
 		Logger.debug("mocecd : is start");
 	
-		// "target" <-subString(5)- "talk target"
+		// TODO Commandクラスを作成してそこに判定ロジックを移動、マジックナンバーも置き換える
 		String targetDir = command.substring(5);
 		if (targetDir.length() == 0) {
-			LogManager.addLogs("会話の相手を入力してください。");
+			LogManager.addLog("会話の相手を入力してください。");
 			return false;
 		}
 		
 		String targetPath = TownManager.getCurrentDir() + File.separator + targetDir;
 		File talkTarget = new File(targetPath);
 		if (talkTarget.isDirectory()) {
-			LogManager.addLogs("それとは会話できません。");
+			LogManager.addLog("それとは会話できません。");
 			return false;
 		}
 		
@@ -110,16 +100,14 @@ public class TownService {
 		return false;
 	}
 	
-	// メソッド名が不適切、思いつかないのでこのまま
+	// XXX メソッド名が不適切、思いつかないのでこのまま
 	private static void readFile(File file) {
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));) {
-			String line;
-			while ((line = br.readLine()) != null) {
-				LogManager.addLogs(line);
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			LogManager.addLogs("会話に失敗しました。");
+		try (BufferedReader br = Files.newBufferedReader(file.toPath())) {
+			br.lines()
+				.forEach(l -> LogManager.addLog(l));
+		} catch(IOException e) {
+			Logger.error("Failed to read [{}], cause by [{}]", file.getAbsolutePath(), e.getStackTrace());
+			LogManager.addLog("会話に失敗しました");
 		}
 	}
 	

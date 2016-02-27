@@ -16,7 +16,7 @@ public class LogManager {
 		return logs;
 	}
 	
-	public static void addLogs(String log) {
+	public static void addLog(String log) {
 		if (logs.size() > 20) {
 			IntStream.rangeClosed(0, logs.size() - 20).forEach(i -> {
 				logs.remove(i);
@@ -27,7 +27,7 @@ public class LogManager {
 		Logger.debug("Add Log ->" + log);
 	}
 	
-	public static void clearLogs() {
+	public static void clear() {
 		logs.clear();
 		Logger.debug("Cleared all logs");
 	}

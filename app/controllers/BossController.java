@@ -17,7 +17,7 @@ public class BossController extends Controller {
 		Random ran = new Random();
 		int randm = ran.nextInt(46) + 1;
 		
-		LogManager.addLogs(Messages.get("boss.comment." + randm));
+		LogManager.addLog(Messages.get("boss.comment." + randm));
 		
 		return ok(boss.render(LogManager.getLogs(), bossForm, "[BOSS]"));
 	}
@@ -25,8 +25,8 @@ public class BossController extends Controller {
 	public Result kill() {
 		Form<BossForm> bossForm = new Form<BossForm>(BossForm.class);
 		
-		LogManager.addLogs(Messages.get("boss.comment.clear"));
-		LogManager.addLogs("ゲームクリアです！！！！！！！！！");
+		LogManager.addLog(Messages.get("boss.comment.clear"));
+		LogManager.addLog("ゲームクリアです！！！！！！！！！");
 		
 		return ok(boss.render(LogManager.getLogs(), bossForm, "[CLEAR!!!!!!!!]"));
 	}
