@@ -1,0 +1,23 @@
+@(logs: List[String])(form: Form[forms.TutorialForm])(pronpt: String)
+
+@main("オープニング") {
+	
+    @if(!logs.isEmpty()) {
+		@for(log <- logs) {
+			<p id="logs"> >@log </p>
+	   	}
+	}
+	
+	@helper.form(action = routes.Application.tutorial()) {
+	    @helper.inputText(
+	    	field = form("command"),
+			args = 
+			'_label -> pronpt,
+			'class -> "hide",
+			'id -> "forcs",
+			'autocomplete -> false
+			)
+		
+		<input type="submit" id="hide">
+	}
+}

@@ -1,0 +1,43 @@
+body { 
+	background-color: black;
+}
+
+p#logs {
+	color: white;
+	margin:0;
+}
+
+p#error {
+	color: red;
+	margin:0;
+}
+
+input#hide {
+	outline: none;
+    border-style: hidden;
+    background-color: black;
+    color: black;
+    width:400px;
+}
+
+label {
+color: white;
+}
+
+.hide {
+	outline: none;
+	border-style: hidden;
+	color: green; 
+	background-color: black;
+}
+
+#forcs_field dl {
+	width:300px;
+}
+#forcs_field dt {
+	 float:left;
+ 	 margin-right:10px;
+}
+#forcs_field dd {
+	 margin-left:80px;
+}
